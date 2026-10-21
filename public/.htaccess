@@ -1,6 +1,6 @@
-Options -Indexes
+# Keep .htaccess minimal for HKUST shared hosting.
+# Avoid Options/Header/ForceType directives that can trigger HTTP 500.
 DirectoryIndex index.html
-AddDefaultCharset UTF-8
 ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
@@ -11,25 +11,3 @@ ErrorDocument 404 /404.html
   RewriteRule ^platforms/?$ /#solutions [R=301,L,NE]
   RewriteRule ^projects/?$ /#research [R=301,L,NE]
 </IfModule>
-
-<IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-
-  <FilesMatch "\.(js|css|woff2)$">
-    Header set Cache-Control "public, max-age=31536000, immutable"
-  </FilesMatch>
-
-  <FilesMatch "\.(mp4|webp|jpg|jpeg|png|svg|mp3)$">
-    Header set Cache-Control "public, max-age=2592000"
-  </FilesMatch>
-
-  <FilesMatch "\.html$">
-    Header set Cache-Control "public, max-age=0, must-revalidate"
-  </FilesMatch>
-</IfModule>
-
-<Files "opengraph-image">
-  ForceType image/png
-  Header set Cache-Control "public, max-age=86400"
-</Files>
