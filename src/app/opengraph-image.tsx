@@ -53,7 +53,7 @@ export default async function OpenGraphImage() {
               letterSpacing: 6,
             }}
           >
-            SIT DYNAMICS — 科學 · 創新 · 科技
+            SIT DYNAMICS — SCIENCE · INNOVATION · TECHNOLOGY
           </div>
         </div>
 

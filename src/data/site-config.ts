@@ -2,7 +2,7 @@ export const siteConfig = {
   brand: {
     name: "SIT Dynamics",
     wordmark: "SIT DYNAMICS",
-    meaning: "科學 · 創新 · 科技",
+    meaning: "SCIENCE · INNOVATION · TECHNOLOGY",
     tagline: "讓機械人像人一樣運動。",
     supporting:
       "從機械設計、機械動力學與智能控制，到強化學習及實機部署，SIT Dynamics 致力於將科學原理轉化為真實世界中可運作的機械人系統。",

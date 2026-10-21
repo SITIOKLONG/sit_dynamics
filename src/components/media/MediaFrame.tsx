@@ -12,6 +12,7 @@ const ratioClasses: Record<MediaRatio, string> = {
   "16/10": "aspect-[16/10]",
   "4/3": "aspect-[4/3]",
   "3/2": "aspect-[3/2]",
+  "3/4": "aspect-[3/4]",
   "1/1": "aspect-square",
 };
 

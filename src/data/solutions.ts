@@ -12,6 +12,7 @@ export interface Offering {
   cta: string;
   enquiryType: string;
   media: MediaSlotKey;
+  secondaryMedia?: MediaSlotKey;
 }
 
 export const offerings: Offering[] = [
@@ -64,6 +65,7 @@ export const offerings: Offering[] = [
     cta: "討論工程試點",
     enquiryType: "工程試點",
     media: "pilot",
+    secondaryMedia: "pilotPhoto",
   },
   {
     id: "development-kit",
@@ -118,6 +120,7 @@ export const offerings: Offering[] = [
     cta: "討論研發教育方案",
     enquiryType: "研發教育計劃",
     media: "education",
+    secondaryMedia: "educationPhoto",
   },
 ];
 

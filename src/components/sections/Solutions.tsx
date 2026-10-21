@@ -125,6 +125,14 @@ export function Solutions() {
                           slot={mediaSlots[offering.media]}
                           sizes="(min-width: 1024px) 30vw, 100vw"
                         />
+                        {offering.secondaryMedia && (
+                          <div className="mt-3">
+                            <MediaFrame
+                              slot={mediaSlots[offering.secondaryMedia]}
+                              sizes="(min-width: 1024px) 30vw, 100vw"
+                            />
+                          </div>
+                        )}
                         <div className="mt-6 lg:hidden">
                           <EnquireLink
                             projectType={offering.enquiryType}

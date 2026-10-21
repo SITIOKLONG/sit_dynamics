@@ -7,6 +7,7 @@ export type MediaRatio =
   | "16/10"
   | "4/3"
   | "3/2"
+  | "3/4"
   | "1/1";
 
 export interface MediaSlot {
@@ -148,6 +149,30 @@ export const mediaSlots = {
     filename: "planC.webp",
     recommended: "1080 × 809（4:3 原圖，介面以 3:2 裁切），WebP，93 KB",
     alt: "兩組雙足機械人腿部實驗平台，作為研發教育硬件參考",
+  },
+  pilotPhoto: {
+    id: "pilot-photo",
+    kind: "image",
+    ratio: "3/4",
+    src: "/media/planB.jpg",
+    poster: null,
+    label: "[工程試點計劃]",
+    caption: "SIT / 工程試點",
+    filename: "planB.jpg",
+    recommended: "960 × 1280（3:4），JPG，222 KB",
+    alt: "學生在電腦室討論工程試點項目",
+  },
+  educationPhoto: {
+    id: "education-photo",
+    kind: "image",
+    ratio: "4/3",
+    src: "/media/planD.jpeg",
+    poster: null,
+    label: "[機械人研發教育計劃]",
+    caption: "SIT / 研發教育",
+    filename: "planD.jpeg",
+    recommended: "4032 × 3024（4:3），JPG，3.0 MB",
+    alt: "學生在機械人實驗室圍繞硬件討論",
   },
   flagship: {
     id: "flagship-humanoid",

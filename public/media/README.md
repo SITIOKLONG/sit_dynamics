@@ -51,7 +51,9 @@
 | `integration-walking.mp4` | Video | 4:3 | 已提供：960×720 走廊實機行走 · H.264 · 30 fps · 46.7 秒 · 約 3.8 MB · 無音軌 | 技術能力：模擬到實機與系統整合 |
 | `integration-walking-poster.jpg` | Image | 4:3 | 已提供：960×720 JPG | 模擬到實機影片封面圖 |
 | `planA.jpeg` | Image | 約 3:2 | 已提供：1691×1122 JPG · 743 KB | 方案一／二：工作坊與工程試點（含可辨識人物，須確認同意） |
+| `planB.jpg` | Image | 3:4 | 已提供：960×1280 JPG · 222 KB | 方案二：工程試點第二張照片 |
 | `planC.webp` | Image | 4:3 | 已提供：1080×809 WebP · 93 KB（介面以 3:2 裁切） | 方案三／四：開發套件與研發教育（ENCOS 硬件參考） |
+| `planD.jpeg` | Image | 4:3 | 已提供：4032×3024 JPG · 3.0 MB | 方案四：研發教育第二張照片 |
 | `encos-humanoid.mp4` | Video | 16:9 | 已提供：1280×720 · H.264 · 30 fps · 16.5 秒 · 約 4.9 MB · 無音軌 | 旗艦研發願景：ENCOS 全尺寸人型參考片段 |
 | `encos-humanoid-poster.jpg` | Image | 16:9 | 已提供：1280×720 JPG | 旗艦影片封面圖 |
 | `westworld-main-title.mp3` | Audio | — | 已提供：116.5 秒 · 320 kbps · 約 4.5 MB（使用者提供，發佈前須確認授權） | 全站背景音樂 |
