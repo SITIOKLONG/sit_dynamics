@@ -9,7 +9,7 @@ export const siteConfig = {
     positioning:
       "專注人型機械人、機械人運動控制與實際系統研發的深科技公司。",
   },
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ilsit.student.ust.hk",
   nav: [
     { label: "研究方向", href: "#research" },
     { label: "技術能力", href: "#capabilities" },

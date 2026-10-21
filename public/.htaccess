@@ -1,0 +1,30 @@
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset UTF-8
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^services/?$ /#solutions [R=301,L,NE]
+  RewriteRule ^contact/?$ /#contact [R=301,L,NE]
+  RewriteRule ^customization/?$ /#capabilities [R=301,L,NE]
+  RewriteRule ^platforms/?$ /#solutions [R=301,L,NE]
+  RewriteRule ^projects/?$ /#research [R=301,L,NE]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  <FilesMatch "\.(js|css|mp4|webp|jpg|jpeg|png|svg|mp3|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<Files "opengraph-image">
+  ForceType image/png
+</Files>

@@ -36,6 +36,22 @@ npm run build
 npm run start
 ```
 
+## HKUST Personal Homepage 部署
+
+網站以靜態輸出部署到 HKUST Personal Homepage（`ilsit`）：
+
+```bash
+npm run build:static
+```
+
+輸出目錄為 `out/`（約 33 MB，低於 100 MB 配額）。先連接 HKUST VPN，再將 `out/` **內的所有內容**上傳到遠端 `/public_html`：
+
+- Host：`sftp.student.ust.hk`（Port 22）
+- Username：`ilsit`
+- 公開網址：`https://ilsit.student.ust.hk`
+
+`public/.htaccess` 會複製到 `out/.htaccess`，負責舊路徑 redirect、404 頁、Open Graph 圖片 MIME 及靜態資源快取。HKUST 只提供靜態檔案及 PHP，不支援 Node.js server，因此不要上傳 `.next/` 或使用 `npm run start`。目前網站沒有使用 MySQL；表單在未配置 `NEXT_PUBLIC_ENQUIRY_ENDPOINT` 前會保持「準備並複製」模式。
+
 ## 頁面結構
 
 `/` 為完整單頁網站，區塊順序如下：
@@ -47,7 +63,7 @@ npm run start
 5. 產品方案（`#solutions`）
 6. 聯絡我們（`#contact`）
 
-原有路由會 redirect 至對應區塊，設定位於 `next.config.ts`：`/services`、`/customization`、`/platforms`、`/projects`、`/contact`。
+原有路由會 redirect 至對應區塊：Node server 由 `next.config.ts` 處理，靜態部署則由 `public/.htaccess` 處理 `/services`、`/customization`、`/platforms`、`/projects`、`/contact`。
 
 ## 內容與價格
 
