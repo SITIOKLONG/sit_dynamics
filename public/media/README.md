@@ -12,7 +12,7 @@
 
 - 首頁主視覺（機身頂部紅燈特寫）：`public/media/hero-humanoid-top.mp4`，封面圖為 `public/media/hero-humanoid-top-poster.jpg`
 - 研發理念：`public/media/biped-walking.mp4`，封面圖為 `public/media/biped-walking-poster.jpg`
-- 技術能力／機械設計（靈巧手）：`public/media/dex-hand.mp4`，封面圖為 `public/media/dex-hand-poster.jpg`
+- 技術能力／機械設計（零件加工）：`public/media/mechanical-design.mp4`，封面圖為 `public/media/mechanical-design-poster.jpg`
 - 技術能力／運動控制（MoveIt 工具示範）：`public/media/moveit-control.mp4`，封面圖為 `public/media/moveit-control-poster.jpg`
 - 技術能力／強化學習：`public/media/reinforcement-learning.mp4`，封面圖為 `public/media/reinforcement-learning-poster.jpg`
 - 技術能力／模擬到實機（實機行走）：`public/media/integration-walking.mp4`，封面圖為 `public/media/integration-walking-poster.jpg`
@@ -42,8 +42,8 @@
 | `hero-humanoid-top-poster.jpg` | Image | 4:5 | 已提供：640×800 JPG · 約 19 KB | 首頁影片封面圖 |
 | `biped-walking.mp4` | Video | 4:3 | 已提供：960×720 · H.264 · 12.4 秒 · 約 3.3 MB · 無音軌 | 研發理念 |
 | `biped-walking-poster.jpg` | Image | 4:3 | 已提供：960×720 JPG | 研發理念影片 封面圖 |
-| `dex-hand.mp4` | Video | 4:3 | 已提供：1200×900 · H.264 · 30 fps · 18.8 秒 · 約 2.2 MB · 無音軌 | 技術能力：機械設計與動力學（靈巧手） |
-| `dex-hand-poster.jpg` | Image | 4:3 | 已提供：1200×900 JPG | 機械設計影片封面圖 |
+| `mechanical-design.mp4` | Video | 4:3 | 已提供：960×720 中心裁切 · H.264 · 30 fps · 6.1 秒 · 約 572 KB · 無音軌 | 技術能力：機械設計與動力學（零件加工） |
+| `mechanical-design-poster.jpg` | Image | 4:3 | 已提供：960×720 JPG · 約 88 KB | 機械設計影片封面圖 |
 | `reinforcement-learning.mp4` | Video | 16:10 | 已提供：1024×640 · H.264 · 15 秒 · 約 4 MB · 無音軌 | 強化學習 |
 | `reinforcement-learning-poster.jpg` | Image | 16:10 | 已提供：1024×640 JPG | 強化學習影片 封面圖 |
 | `moveit-control.mp4` | Video | 4:3 | 已提供：1200×900 · H.264 · 30 fps · 28.4 秒 · 約 3.4 MB · 無音軌 | 技術能力：運動控制（MoveIt 工具示範） |
