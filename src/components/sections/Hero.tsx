@@ -2,103 +2,110 @@ import { siteConfig } from "@/data/site-config";
 import { mediaSlots } from "@/data/media";
 import { Button } from "@/components/ui/Button";
 import { MediaFrame } from "@/components/media/MediaFrame";
-import { Timecode } from "@/components/media/Timecode";
 import { Reveal } from "@/components/ui/Reveal";
 
-const techTags = ["ISAAC LAB", "MUJOCO", "ROS2", "RL", "SIM2REAL"];
+const technicalTags = [
+  "人型機械人",
+  "動力學與控制",
+  "強化學習",
+  "模擬到實機",
+];
 
 export function Hero() {
-  const heroSlot = mediaSlots.heroVideo;
-
   return (
-    <section className="relative overflow-hidden border-b border-white/10 bg-void">
+    <section
+      id="top"
+      className="relative overflow-hidden border-b border-line bg-surface"
+    >
       <div
+        className="pointer-events-none absolute inset-0 eng-grid opacity-25"
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 eng-grid opacity-40"
       />
       <div
+        className="pointer-events-none absolute left-0 top-0 h-full w-px bg-line/60"
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_78%_18%,rgba(217,64,58,0.08),transparent_55%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 grain opacity-[0.035]"
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-6 pt-16 pb-20 lg:px-10 lg:pt-24 lg:pb-28">
-        <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,11fr)_minmax(0,9fr)]">
-          <div>
-            <Reveal>
-              <p className="flex items-center gap-3 font-mono text-[11px] tracking-technical text-steel uppercase">
-                <span className="size-1.5 bg-signal" aria-hidden="true" />
-                {siteConfig.brand.name} — {siteConfig.brand.descriptor}
+      <div className="relative mx-auto grid max-w-[1440px] items-center gap-14 px-5 pb-16 pt-14 lg:min-h-[calc(100svh-72px)] lg:grid-cols-12 lg:gap-10 lg:px-10 lg:pb-20 lg:pt-16">
+        <div className="lg:col-span-7">
+          <Reveal>
+            <p className="font-mono text-[10px] uppercase tracking-technical text-muted">
+              SIT Dynamics — {siteConfig.brand.meaning}
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.06}>
+            <h1 className="mt-7 text-balance font-display text-[clamp(2.5rem,6.4vw,5.2rem)] font-semibold leading-[1.01] tracking-[-0.04em] text-fg">
+              <span className="block">打造能力更強</span>
+              <span className="block">
+                的人型機械人<span className="text-signal">。</span>
+              </span>
+            </h1>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="mt-6 border-l-2 border-signal pl-4">
+              <p className="font-display text-base font-medium tracking-[-0.01em] text-fg/90 sm:text-lg">
+                {siteConfig.brand.tagline}
               </p>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <h1 className="mt-7 font-display text-[clamp(2.6rem,6vw,4.6rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-bone">
-                Research. Build.
-                <br />
-                Verify<span className="text-signal">.</span>
-              </h1>
-            </Reveal>
-            <Reveal delay={0.16}>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed font-medium text-bone/90 md:text-xl">
-                {siteConfig.brand.supportingLine}
-              </p>
-              <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-steel">
-                {siteConfig.brand.heroIntro}
-              </p>
-            </Reveal>
-            <Reveal delay={0.24}>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Button href="/services" size="lg">
-                  探索服務
-                </Button>
-                <Button href="/contact" variant="outline-dark" size="lg">
-                  討論工程項目
-                </Button>
-              </div>
-            </Reveal>
-            <Reveal delay={0.32}>
-              <ul className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3">
-                {techTags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="flex items-center gap-3 font-mono text-[11px] tracking-technical text-steel uppercase"
-                  >
-                    <span className="size-1 bg-signal" aria-hidden="true" />
-                    {tag}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.14}>
+            <p className="mt-7 max-w-xl text-[15px] leading-[1.85] text-muted">
+              {siteConfig.brand.supporting}
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button href="#research" size="lg">
+                探索研發方向
+              </Button>
+              <Button href="#contact" variant="outline" size="lg">
+                討論合作項目
+              </Button>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.26}>
+            <div className="mt-12 border-t border-line pt-5">
+              <ul className="grid grid-cols-2 gap-x-6 gap-y-3 font-mono text-[9px] uppercase tracking-technical text-muted/80 sm:flex sm:flex-wrap sm:items-center sm:gap-x-5">
+                {technicalTags.map((tag, index) => (
+                  <li key={tag} className="flex items-center gap-3">
+                    <span
+                      className="hidden size-1 bg-signal sm:inline-block"
+                      aria-hidden="true"
+                    />
+                    <span>{tag}</span>
+                    {index < technicalTags.length - 1 && (
+                      <span
+                        className="hidden text-muted/30 sm:inline"
+                        aria-hidden="true"
+                      >
+                        /
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
+        </div>
 
-          <Reveal delay={0.18}>
-            <MediaFrame
-              slot={heroSlot}
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              overlay={
-                <>
-                  <div className="pointer-events-none absolute inset-x-0 top-9 flex items-center justify-between px-4">
-                    <Timecode className="font-mono text-[10.5px] tracking-technical text-bone/80" />
-                    <span className="font-mono text-[10.5px] tracking-technical text-steel/80">
-                      REC ●
-                    </span>
-                  </div>
-                  <div className="pointer-events-none absolute bottom-12 left-1/2 flex -translate-x-1/2 items-center gap-3">
-                    <span className="size-1.5 animate-pulse bg-signal" aria-hidden="true" />
-                    <span className="font-mono text-[11px] tracking-technical text-bone/90 uppercase">
-                      Real Robot Footage / Coming Soon
-                    </span>
-                  </div>
-                </>
-              }
-            />
-            <p className="mt-4 flex items-center justify-between font-mono text-[10.5px] tracking-technical text-steel/60 uppercase">
-              <span>SRC — {heroSlot.src}</span>
-              <span className="hidden sm:inline">AMBIENT LOOP / NO AUDIO</span>
-            </p>
+        <div className="lg:col-span-5">
+          <Reveal delay={0.14}>
+            <div className="lg:pl-6">
+              <MediaFrame
+                slot={mediaSlots.hero}
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                priority
+              />
+              <div className="mt-3 flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-technical text-muted/80">
+                <span>機身頂部特寫</span>
+                <span>SIT / 頂部結構</span>
+              </div>
+            </div>
           </Reveal>
         </div>
       </div>

@@ -1,95 +1,105 @@
-# SIT Dynamics — Official Website
+# SIT Dynamics 官方網站
 
-人型機械人研發教育與工程整合的商業網站（澳門市場）。品牌工作名稱為 **SIT Dynamics**（Research & Engineering），視覺風格為 cinematic robotics research studio。
+SIT Dynamics 的單頁式品牌網站，內容涵蓋人型機械人研究、機械動力學、運動控制、強化學習及模擬到實機部署。
 
-## 技術棧
+**品牌定位：** 專注人型機械人、機械人運動控制與實際系統研發的深科技公司。
 
-- Next.js 16（App Router）＋ React 19 ＋ TypeScript（strict）
-- Tailwind CSS v4（`src/app/globals.css` 內 `@theme` 定義品牌色票與字體）
-- lucide-react 圖示、motion（極少量動效，支援 `prefers-reduced-motion`）
-- 無資料庫、無登入；表單為純前端整理＋電郵傳送
+**品牌標語：** 讓機械人像人一樣運動。
 
-## 啟動
+## 視覺語言
+
+- **Bone White `#F0EEE7`**：主要背景、留白、首頁及研究區。
+- **Desert Sand `#C8B99E`**：次要區塊、圖像暖調及細節，避免西部主題化。
+- **Graphite `#202124`**：主文字、深色工程紀錄及旗艦願景。
+- **Oxide Red `#762F32`**：品牌重點、CTA 及少量識別元素。
+- **Laboratory Grey `#A7AAA8`**：邊框、技術標籤及次要資訊。
+- 深色 `.theme-dark` 區段用於工程紀錄、旗艦願景、Footer 及媒體框；其餘頁面保持 Bone White 研究感。
+
+## 技術架構
+
+- Next.js 16（App Router）
+- React 19
+- TypeScript（strict）
+- Tailwind CSS 4
+- Motion（克制、可關閉的進場效果）
+- Lucide icons
+- 字體：Manrope（英文標題）、Inter（正文）、IBM Plex Mono（技術標籤），中文使用系統 CJK 字體 fallback
+
+## 本機執行
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
+npm run dev      # http://localhost:3000
+npm run lint
+npm run typecheck
+npm run build
+npm run start
 ```
 
-其他指令：
+## 頁面結構
+
+`/` 為完整單頁網站，區塊順序如下：
+
+1. 首頁主視覺（Hero）
+2. 研究願景（`#research`）
+3. 技術能力（`#capabilities`）
+4. 旗艦研發願景（`#vision`）
+5. 產品方案（`#solutions`）
+6. 聯絡我們（`#contact`）
+
+原有路由會 redirect 至對應區塊，設定位於 `next.config.ts`：`/services`、`/customization`、`/platforms`、`/projects`、`/contact`。
+
+## 內容與價格
+
+旗艦願景及四個商業方案集中於 `src/data/solutions.ts`，價格由 `src/lib/pricing.ts` 格式化。旗艦願景先行，隨後列出商業方案。
+
+- 全尺寸人型機械人研發計劃 — 1,000,000 港元（旗艦願景；須經可行性評估及獨立提案，並非現貨或已成交價格）
+- 機械人工作坊與示範 — 20,000 港元
+- 工程試點計劃 — 80,000 港元
+- 雙足開發套件 — 200,000 港元
+- 機械人研發教育計劃 — 300,000 港元
+
+所有價格均為現階段方案定位，正式報價須按實際交付範圍確認。
+
+導航、技術能力、產品方案、表單選項及聯絡設定集中於 `src/data/`。
+
+## 媒體素材替換
+
+尚未提供真實檔案的視覺素材由程式碼生成設計化暫代素材，不會出現破圖。素材位置與精確標籤定義於 `src/data/media.ts`；將真實檔案放入 `public/media/` 並使用 [`public/media/README.md`](public/media/README.md) 列出的檔名，`MediaFrame` 會自動偵測並替換，無需修改元件。
+
+不得將第三方機械人影片、模型或照片呈現為 SIT Dynamics 自行設計的產品。使用任何素材前須確認授權，並清楚標示概念渲染。
+
+旗艦研發願景區使用標示為 ENCOS 的第三方參考片段，畫面屬第三方，並非 SIT Dynamics 自行研發產品。
+
+全站背景音樂播放器會偵測 `public/media/westworld-main-title.mp3`；現時音檔由使用者提供，發佈前須確認授權，不可從 YouTube 抽取或重新託管未授權錄音。
+
+## 聯絡表單
+
+目前未配置電郵地址或表單傳送端點。表單刻意保持透明：未配置時只會整理可複製的查詢內容，並明確顯示「未寄出」，不會假裝傳送成功。
+
+在 `.env.local` 設定以下任一變數（參考 `.env.example`）：
 
 ```bash
-npm run build      # production build
-npm run start      # 啟動 production server
-npm run lint       # ESLint
-npm run typecheck  # tsc --noEmit
+# 選項 A — JSON POST 端點
+NEXT_PUBLIC_ENQUIRY_ENDPOINT=https://example.com/api/enquiries
+
+# 選項 B — mailto fallback
+NEXT_PUBLIC_CONTACT_EMAIL=enquiries@example.com
+
+# Canonical URL、sitemap 及 metadata
+NEXT_PUBLIC_SITE_URL=https://www.example.com
 ```
 
-## 頁面
+- 若設定 `NEXT_PUBLIC_ENQUIRY_ENDPOINT`，表單會以 JSON POST 傳送查詢。
+- 否則若設定 `NEXT_PUBLIC_CONTACT_EMAIL`，結果會提供 mailto 連結及可複製文字。
+- 若兩者均未設定，結果會顯示「尚未配置傳送方式」及可複製的查詢內容。
 
-| 路徑 | 內容 |
-| --- | --- |
-| `/` | Cinematic Hero（實機影片 placeholder）、服務預覽、技術範疇、客製化與平台 teaser |
-| `/services` | 四層服務方案（MOP 20,000 / 80,000 / 200,000 / 500,000）＋兩個可選延伸模組 |
-| `/customization` | 六類客製化工程服務、能力標籤、合作流程 |
-| `/platforms` | 自家雙足平台、Unitree R1 / G1 / Go2 比較、公開參考價表、免責聲明 |
-| `/projects` | 六個案例類別，標示已完成／持續開發／概念研究方向 |
-| `/contact` | 項目諮詢表單（含 query 參數預填，如 `/contact?type=custom`、`/contact?module=beijing-hm`） |
+請勿公開虛構的電話、地址、公司註冊資料、社交帳戶或法律資訊。
 
-## 專案結構
+## 內容誠信
 
-```text
-src/
-  app/            # 頁面、layout、globals.css、icon.svg、opengraph-image、robots、sitemap
-  components/
-    layout/       # Header（含手機導覽）、Footer
-    sections/     # Hero、PageHeader、Intro、WhatWeBuild、CustomTeaser、PlatformTeaser、VisitTeaser、CtaBand
-    cards/        # ServiceTierBlocks、OptionalModuleCard
-    media/        # MediaFrame（Image／Video placeholder 統一元件）、ChartPlaceholder、Timecode
-    forms/        # ContactForm
-    ui/           # Button、Tag、SectionHeading、PriceTable、Reveal
-  data/           # 所有內容集中管理（見下）
-  lib/            # utils、pricing、assets（fs 偵測 public/media）
-public/media/     # 真實素材放這裡（見 public/media/README.md）
-```
-
-## 常見修改
-
-### 1. 更改品牌名稱
-
-全部品牌字串集中於 `src/data/site-config.ts`（名稱、wordmark、tagline、descriptor、導覽、CTA、SEO keywords、免責聲明）。
-
-### 2. 替換圖片／影片
-
-1. 按 `public/media/README.md` 的檔名表放入素材（例如 `public/media/hero-biped.mp4`）。
-2. 重新 `npm run build` 或重啟 dev server。
-3. 檔案存在時自動取代 placeholder（偵測邏輯：`src/lib/assets.ts`；slot 定義：`src/data/media.ts`）。
-
-未有檔案的 slot 會顯示工程感 placeholder 並標示「素材待補」，不會出現破圖。
-
-### 3. 配置聯絡電郵
-
-```bash
-cp .env.example .env.local
-# 編輯 .env.local：
-# NEXT_PUBLIC_CONTACT_EMAIL=your@email.com
-# NEXT_PUBLIC_SITE_URL=https://your-domain.com
-```
-
-未配置電郵時，表單**不會假裝寄出**：提交後只會整理諮詢摘要，供使用者複製或以其他方式傳送，並顯示管理員配置提示。配置後會多出「以電郵傳送」按鈕（mailto）。
-
-### 4. 更新平台價格／資料
-
-- 價格列、版本差異、租借注意事項：`src/data/platforms.ts`
-- 更新後請同步修改 `lastVerified`；來源未經驗證時保持 `sourceUrl: null`（顯示「向供應商查詢」）。
-
-### 5. 服務方案／客製化／案例內容
-
-`src/data/services.ts`、`src/data/customization.ts`、`src/data/projects.ts`、`src/data/capabilities.ts`。
-
-## 內容守則（請勿違反）
-
-- 不捏造客戶案例、學校合作、獎項、教師評價或活動紀錄。
-- 不宣稱自家平台與商用 EDU 產品同級；第三方價格一律標示公開參考價／非澳門正式報價。
-- 不保證北京半馬參賽資格或名次；不暗示與 InnoX 或 Unitree 已有合作。
-- 已完成的研發方向與規劃中的方向必須清楚區分。
+- 不宣稱任何客戶、推薦、獎項、論文、團隊成員或合作夥伴。
+- 工程實踐區標示為「研發中」的素材位置，不代表已交付項目或客戶案例。
+- 半馬挑戰只作為未來研發挑戰目標，不宣稱已實現或保證完成。
+- 全尺寸人型機械人研發計劃為概念願景，不是已售出或現成產品。
+- 上線前必須以原創或已授權素材替換其餘暫代素材，並完成法律及使用權審查。

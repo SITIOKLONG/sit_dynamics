@@ -1,14 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, IBM_Plex_Mono, Noto_Sans_TC } from "next/font/google";
+import { IBM_Plex_Mono, Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/site-config";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { SiteSoundtrack } from "@/components/layout/SiteSoundtrack";
+import { publicAssetExists } from "@/lib/assets";
 
-const archivo = Archivo({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-archivo",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -19,35 +26,30 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const notoSansTC = Noto_Sans_TC({
-  subsets: ["latin"],
-  variable: "--font-noto",
-  weight: ["400", "500", "700"],
-  display: "swap",
-  preload: false,
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.brand.name}｜澳門人型機械人研發教育與工程整合`,
-    template: `%s｜${siteConfig.brand.name}`,
+    default: siteConfig.seo.title,
+    template: `%s — ${siteConfig.brand.name}`,
   },
-  description:
-    "以雙足人型機械人、運動控制、強化學習與實機測試為基礎，為澳門學校及機構提供由體驗工作坊到年度工程研發項目的教育與整合方案。",
+  description: siteConfig.seo.description,
+  applicationName: siteConfig.brand.name,
   keywords: [...siteConfig.seo.keywords],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: siteConfig.seo.locale,
-    url: siteConfig.url,
+    url: "/",
     siteName: siteConfig.brand.name,
-    title: `${siteConfig.brand.name} — ${siteConfig.brand.tagline}`,
-    description: siteConfig.brand.supportingLine,
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.brand.name} — ${siteConfig.brand.tagline}`,
-    description: siteConfig.brand.supportingLine,
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
   },
   robots: {
     index: true,
@@ -56,8 +58,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#111214",
-  colorScheme: "dark",
+  themeColor: "#F0EEE7",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -65,13 +67,27 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="zh-MO"
-      className={`${archivo.variable} ${plexMono.variable} ${notoSansTC.variable}`}
+      lang="zh-Hant"
+      className={`${inter.variable} ${manrope.variable} ${plexMono.variable}`}
     >
-      <body className="flex min-h-screen flex-col font-sans">
+      <body className="flex min-h-screen flex-col bg-surface font-sans text-fg antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-signal focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-paper"
+        >
+          跳至主要內容
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">
+          {children}
+        </main>
         <Footer />
+        {publicAssetExists(siteConfig.soundtrack.src) && (
+          <SiteSoundtrack {...siteConfig.soundtrack} />
+        )}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
       </body>
     </html>
   );

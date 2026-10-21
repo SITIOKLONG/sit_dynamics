@@ -1,124 +1,64 @@
-import Link from "next/link";
 import { siteConfig } from "@/data/site-config";
-import { serviceTiers } from "@/data/services";
+import { Wordmark } from "./Wordmark";
 
 export function Footer() {
-  const email = siteConfig.contact.email;
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 bg-void">
-      <div className="mx-auto max-w-[1400px] px-6 py-16 lg:px-10">
+    <footer className="theme-dark border-t border-line bg-ink">
+      <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <div className="flex items-center gap-3">
-              <span
-                aria-hidden="true"
-                className="relative block size-5 border border-bone/80"
-              >
-                <span className="absolute right-[3px] bottom-[3px] size-1.5 bg-signal" />
-              </span>
-              <span className="font-display text-[15px] font-semibold tracking-[0.18em] text-bone">
-                {siteConfig.brand.wordmark}
-              </span>
-            </div>
-            <p className="mt-6 font-mono text-[11px] tracking-technical text-steel uppercase">
-              {siteConfig.brand.tagline}
+          <div className="lg:col-span-6">
+            <Wordmark />
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-muted">
+              {siteConfig.brand.positioning}
             </p>
-            <p className="mt-2 text-sm text-bone/90">
-              {siteConfig.brand.taglineZh}
-            </p>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-steel">
-              {siteConfig.brand.supportingLine}
-            </p>
-            <p className="mt-6 font-mono text-[10.5px] tracking-technical text-steel/60 uppercase">
-              {siteConfig.brand.focus}
+            <p className="mt-4 max-w-sm font-mono text-[9px] uppercase leading-relaxed tracking-technical text-muted/80">
+              {siteConfig.disclaimers.visuals}
             </p>
           </div>
 
-          <nav className="lg:col-span-2" aria-label="頁面導覽">
-            <h3 className="font-mono text-[10.5px] tracking-technical text-steel uppercase">
-              網站導覽
-            </h3>
-            <ul className="mt-4 space-y-3">
+          <nav aria-label="頁尾導航" className="lg:col-span-3">
+            <p className="font-mono text-[9px] uppercase tracking-technical text-muted/80">
+              網站導航
+            </p>
+            <ul className="mt-5 space-y-3">
               {siteConfig.nav.map((item) => (
                 <li key={item.href}>
-                  <Link
+                  <a
                     href={item.href}
-                    className="text-sm text-bone/80 transition-colors hover:text-bone"
+                    className="text-sm text-muted transition-colors hover:text-fg"
                   >
                     {item.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
           </nav>
 
-          <nav className="lg:col-span-3" aria-label="服務分類">
-            <h3 className="font-mono text-[10.5px] tracking-technical text-steel uppercase">
-              服務分類
-            </h3>
-            <ul className="mt-4 space-y-3">
-              {serviceTiers.map((tier) => (
-                <li key={tier.id}>
-                  <Link
-                    href={`/services#${tier.id}`}
-                    className="text-sm text-bone/80 transition-colors hover:text-bone"
-                  >
-                    {tier.name}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  href="/customization"
-                  className="text-sm text-bone/80 transition-colors hover:text-bone"
-                >
-                  客製化工程服務
-                </Link>
-              </li>
-            </ul>
-          </nav>
-
-          <div className="lg:col-span-2">
-            <h3 className="font-mono text-[10.5px] tracking-technical text-steel uppercase">
-              聯絡
-            </h3>
-            {email ? (
-              <a
-                href={`mailto:${email}`}
-                className="mt-4 block text-sm text-bone/90 underline decoration-signal/60 underline-offset-4 hover:text-bone"
-              >
-                {email}
-              </a>
-            ) : (
-              <p className="mt-4 text-sm text-steel">
-                {siteConfig.contact.pendingLabel}
-              </p>
-            )}
-            <p className="mt-4 text-[13px] leading-relaxed text-steel/80">
-              服務對象：{siteConfig.contact.audience}
+          <div className="lg:col-span-3">
+            <p className="font-mono text-[9px] uppercase tracking-technical text-muted/80">
+              聯絡我們
             </p>
-            {!email && (
-              <p className="mt-4 font-mono text-[10px] leading-relaxed tracking-technical text-steel/50 uppercase">
-                {siteConfig.contact.adminHint}
-              </p>
-            )}
+            <a
+              href="#contact"
+              className="mt-5 inline-flex items-center gap-2 text-sm text-fg transition-colors hover:text-signal-light"
+            >
+              項目查詢
+              <span aria-hidden="true">→</span>
+            </a>
+            <p className="mt-4 max-w-[15rem] font-mono text-[9px] uppercase leading-relaxed tracking-technical text-muted/80">
+              {siteConfig.contact.email ?? siteConfig.contact.pendingLabel}
+            </p>
+            <p className="mt-4 max-w-[15rem] text-xs leading-relaxed text-muted/80">
+              {siteConfig.contact.noPublicDetails}
+            </p>
           </div>
         </div>
 
-        <div className="mt-16 border-t border-white/10 pt-8">
-          <p className="max-w-4xl text-[12px] leading-relaxed text-steel/70">
-            {siteConfig.disclaimers.thirdParty}
-          </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="font-mono text-[10.5px] tracking-technical text-steel/60 uppercase">
-              © {year} {siteConfig.brand.name}. All rights reserved.
-            </p>
-            <p className="font-mono text-[10.5px] tracking-technical text-steel/60 uppercase">
-              {siteConfig.brand.wordmark} — {siteConfig.brand.descriptor}
-            </p>
-          </div>
+        <div className="mt-14 flex flex-col gap-3 border-t border-line pt-6 font-mono text-[9px] uppercase tracking-technical text-muted/80 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} SIT Dynamics. 版權所有。</p>
+          <p>{siteConfig.brand.meaning}</p>
         </div>
       </div>
     </footer>

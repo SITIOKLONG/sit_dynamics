@@ -1,28 +1,66 @@
 @import "tailwindcss";
 
+/*
+  Palette
+  Bone White #F0EEE7 — primary surface and negative space
+  Desert Sand #C8B99E — secondary surfaces, image warmth and fine detail
+  Graphite #202124 — primary foreground and dark engineering zones
+  Oxide Red #762F32 — restrained brand emphasis and actions
+  Laboratory Grey #A7AAA8 — rules, technical labels and secondary information
+
+  The base theme is Bone White with Graphite foreground. Sections that carry
+  engineering records, the flagship vision, the footer and media viewports use
+  .theme-dark, which swaps the surface and foreground aliases while keeping the
+  same exact brand palette.
+*/
 @theme {
-  --color-void: #111214;
-  --color-ink: #0b0c0d;
-  --color-graphite: #27282a;
-  --color-graphite-soft: #1a1c1e;
-  --color-bone: #e9e6de;
-  --color-bone-soft: #f2efe7;
-  --color-signal: #d9403a;
-  --color-signal-deep: #a82e29;
-  --color-steel: #909397;
+  --color-bone: #f0eee7;
+  --color-paper: #f0eee7;
+  --color-sand: #c8b99e;
+  --color-graphite: #202124;
+  --color-oxide: #762f32;
+  --color-lab: #a7aaa8;
 
-  --font-sans: var(--font-noto), ui-sans-serif, system-ui, "PingFang TC",
-    "Microsoft JhengHei", "Heiti TC", sans-serif;
-  --font-display: var(--font-archivo), var(--font-noto), ui-sans-serif,
+  --color-surface: #f0eee7;
+  --color-panel: #e6dfd2;
+  --color-ink: #e6dfd2;
+  --color-fg: #202124;
+  --color-muted: #40433f;
+  --color-signal: #762f32;
+  --color-signal-light: #762f32;
+  --color-signal-deep: #5f2528;
+  --color-line: #a7aaa8;
+  --color-focus: #762f32;
+
+  --font-sans: var(--font-inter), "Noto Sans TC", "Noto Sans CJK TC",
+    "PingFang TC", "Microsoft JhengHei", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), "Noto Sans TC",
+    "Noto Sans CJK TC", "PingFang TC", "Microsoft JhengHei", ui-sans-serif,
     system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", Menlo,
-    Consolas, monospace;
+  --font-mono: var(--font-plex-mono), "Noto Sans Mono CJK TC", "PingFang TC",
+    "Microsoft JhengHei", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --tracking-technical: 0.16em;
+  --tracking-technical: 0.18em;
+}
+
+.theme-dark {
+  color-scheme: dark;
+  color: var(--color-fg);
+  --color-surface: #202124;
+  --color-panel: #17181a;
+  --color-ink: #131416;
+  --color-fg: #f0eee7;
+  --color-muted: #a7aaa8;
+  --color-signal-light: #d0a2a3;
+  --color-signal-deep: #8c3a3e;
+  --color-line: #3e413e;
+  --color-focus: #c8b99e;
 }
 
 html {
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 4.5rem;
+  color-scheme: light;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -32,47 +70,85 @@ html {
 }
 
 body {
-  background-color: var(--color-void);
-  color: var(--color-bone);
+  background-color: var(--color-surface);
+  color: var(--color-fg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
   background-color: var(--color-signal);
-  color: #ffffff;
+  color: var(--color-paper);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-signal);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
 }
+
+::placeholder {
+  color: var(--color-muted);
+}
+
+.media-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(240 238 231 / 0.055) 0,
+    rgb(240 238 231 / 0.055) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  mix-blend-mode: soft-light;
+}
+
 
 @utility eng-grid {
   background-image: linear-gradient(
       to right,
-      rgba(233, 230, 222, 0.05) 1px,
+      color-mix(in srgb, var(--color-fg) 8%, transparent) 1px,
       transparent 1px
     ),
-    linear-gradient(to bottom, rgba(233, 230, 222, 0.05) 1px, transparent 1px);
-  background-size: 44px 44px;
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-fg) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
 }
 
-@utility eng-grid-light {
+@utility eng-grid-fine {
   background-image: linear-gradient(
       to right,
-      rgba(17, 18, 20, 0.05) 1px,
+      color-mix(in srgb, var(--color-fg) 6%, transparent) 1px,
       transparent 1px
     ),
-    linear-gradient(to bottom, rgba(17, 18, 20, 0.05) 1px, transparent 1px);
-  background-size: 44px 44px;
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-fg) 6%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 24px 24px;
 }
 
-@utility grain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+@utility media-glow {
+  background-image: radial-gradient(
+      ellipse at 50% 36%,
+      color-mix(in srgb, var(--color-sand) 25%, transparent),
+      transparent 64%
+    ),
+    radial-gradient(
+      ellipse at 18% 78%,
+      color-mix(in srgb, var(--color-oxide) 12%, transparent),
+      transparent 55%
+    );
 }
 
 @media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   *,
   *::before,
   *::after {

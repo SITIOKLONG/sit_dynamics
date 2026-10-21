@@ -1,57 +1,53 @@
-# SIT Dynamics 官方網站 — 實作計劃
+# SIT Dynamics — 實作說明
 
-> 狀態：已定稿並開始實作。此文件供後續參考，記錄品牌決定、架構與實作範圍。
+## 專案目標
 
-## 1. 品牌
+將網站建立為完整、專業的單頁式人型機械人研發公司網站：以 Bone White 與 Graphite 為主的克制研究美學、深色工程紀錄區、清楚的技術敘事，以及四個可比較的商業方案與獨立旗艦願景。不使用 SaaS 卡片模板、虛構案例或未經驗證的性能數據。
 
-- 品牌名稱：**SIT Dynamics**（working name；全部品牌字串集中於 `src/data/site-config.ts`，日後可一處改名）
-- Descriptor：Research & Engineering
-- 技術焦點：Humanoid Robotics / Control Systems / Engineering Integration
-- Tagline：`Research. Build. Verify.` / 中文：`研究，構建，驗證。`
-- 支撐句：從模擬到實機，從想法到能夠運作的系統。
-- 不保留「弘宇創新」品牌字串；內容以繁體中文（澳門用語）為主，技術名稱保留英文。
+## 架構
 
-## 2. 視覺方向（Cinematic Robotics Research Studio）
+- Next.js App Router、React、TypeScript strict、Tailwind CSS 4。
+- 單一路由 `/`，由八個內容區塊、共用 Header 及 Footer 組成。
+- 舊路由 redirect 至對應 anchor。
+- 內容及價格集中於 `src/data/`。
+- 共用 UI：`Button`、`SectionLabel`、`SectionHeading`、`Tag`、`Reveal`、`MediaFrame`。
+- 表單傳送透過 `NEXT_PUBLIC_ENQUIRY_ENDPOINT` 或 `NEXT_PUBLIC_CONTACT_EMAIL` 配置；未配置時保持 prepare-and-copy 模式。
 
-- 參考素材：實拍雙足機械人片段（低光實驗室／走廊、暗色機械結構、紅色 LED 及小量紅光、去飽和工業灰、輕微顆粒感、克制對比）
-- 色票：
-  - Void Black `#111214`
-  - Graphite `#27282A`
-  - Warm Bone `#E9E6DE`
-  - Signal Red `#D9403A`
-  - Steel Grey `#909397`
-- 完全棄用舊 signal-orange 色票。
-- 深色電影感 Hero（55/45）＋大型 4:3 media frame；深色段落與 Warm Bone 編輯排版段落交替。
-- 紅色只用於主要 CTA、指示點、細分隔及選定數據。
-- 克制工程 overlay：timecode、experiment label、細座標線；不做假 dashboard、霓虹漸變、cyberpunk 裝飾。
-- 12 欄 grid、細分隔線、大留白、方正小圓角；字體 Archivo（顯示）＋ Noto Sans TC（內文）＋ IBM Plex Mono（工程標籤）。
-- Motion 極少量（hero 淡入、whileInView reveal），全面支援 `prefers-reduced-motion`。
+## 內容對照
 
-## 3. 技術架構
+| 區域 | 來源 |
+| --- | --- |
+| 品牌、導航、聯絡設定、SEO | `src/data/site-config.ts` |
+| 技術能力 | `src/data/capabilities.ts` |
+| 工程實踐 | `src/data/engineering.ts` |
+| 產品方案及旗艦願景 | `src/data/solutions.ts` |
+| 研發流程 | `src/data/approach.ts` |
+| 表單選項 | `src/data/enquiry.ts` |
+| 素材位置及標籤 | `src/data/media.ts` |
 
-- Next.js 16（App Router）＋ TypeScript strict ＋ Tailwind CSS v4 ＋ lucide-react ＋ motion
-- Server Components 為主；client 只限：Header 手機導覽、ContactForm、Reveal、Timecode
-- 無資料庫、無登入、無複雜後端
-- 所有服務、客製化、平台、價格、案例、媒體 slot 資料集中於 `src/data/*`
-- `src/lib/assets.ts` 以 `fs.existsSync` 偵測 `public/media` 實檔：放入正確檔名即自動取代 placeholder（重建後生效），無需改程式碼
+## 設計 Tokens
 
-## 4. 頁面與內容
+- Bone White `#F0EEE7`：主要背景、留白、首頁及研究區
+- Desert Sand `#C8B99E`：次要區塊、圖像暖調及細節；不作為西部主題裝飾
+- Graphite `#202124`：主文字、深色工程區及旗艦區
+- Oxide Red `#762F32`：品牌重點、CTA 及少量識別元素
+- Laboratory Grey `#A7AAA8`：邊框、技術標籤及次要資訊
+- Manrope 英文標題 / Inter 正文 / IBM Plex Mono 技術標籤 / 系統 CJK fallback
+- 直角、細線邊框、工程網格暫代素材、充足留白
+- 預設淺色主題；工程紀錄、旗艦願景、Footer 及媒體框使用 `.theme-dark` 反轉 Graphite / Bone White 角色
+- 所有區塊使用不同視覺節奏：大幅主視覺、編輯式文字、工程紀錄、方案比較、獨立旗艦願景
 
-- `/` Hero、Intro（模擬→轉移→驗證流程）、四層服務預覽、What We Build（6 範疇＋狀態）、客製化 teaser、平台選型 teaser、InnoX 參訪 teaser、CTA band
-- `/services` MOP 20,000 / 80,000 / 200,000 / 500,000 四層完整交付／適合對象／不包含＋2 個 optional modules（北京半馬準備、深圳參訪，可選、待確認）
-- `/customization` 6 張技術卡（既有能力／需可行性評估標籤）＋ 4 步流程＋評估聲明
-- `/platforms` 自家低成本雙足、R1／R1 EDU、G1／G1 EDU、Go2 四足公平比較；版本差異、公開參考價表（`lastVerified`、來源未驗證顯示「向供應商查詢」）＋完整免責聲明
-- `/projects` 6 個案例類別（已完成／持續開發／概念研究方向），忠於事實，不虛構學校合作
-- `/contact` 表單 9 欄位＋8 項目類型＋6 預算選項；未配置 `NEXT_PUBLIC_CONTACT_EMAIL` 時不假裝寄出 → 整理摘要＋複製內容＋管理員配置提示
+## 完成清單
 
-## 5. 媒體策略
-
-- Hero 影片：純 placeholder（不動用 `~/Downloads` 實拍檔）；日後將檔案放入 `public/media/hero-biped.mp4` 即自動播片
-- 全部 placeholder 經 `src/data/media.ts` 中央管理；CSS/SVG 工程感設計，細小角落標籤，不放大字遮蓋
-- `public/media/README.md` 列明每個 slot 的將來素材、建議尺寸及檔名
-
-## 6. 驗收
-
-- `npm install` → `npm run build` → `npm run lint` → `tsc --noEmit`
-- dev server 逐頁 smoke test（6 頁 200、手機導覽、價格表手機閱讀）
-- 根目錄 `README.md` 說明啟動、替換素材、配置聯絡電郵
+- [x] 單頁結構、anchor 導航及 scrollspy
+- [x] 可存取手機選單（Escape、focus trap、body scroll lock）
+- [x] Hero、Research Vision、Capabilities、Engineering in Practice、Solutions、Flagship、Approach、Contact、Footer
+- [x] 四個商業價格及獨立 1,000,000 港元旗艦願景
+- [x] 精確暫代素材標籤及中央素材配置
+- [x] 透明聯絡表單，不假裝完成未實作操作
+- [x] Metadata、Open Graph、sitemap、robots、404
+- [x] 舊路由 redirects
+- [x] 中文內容、CJK fallback、鍵盤焦點及 reduced-motion 支援
+- [ ] 以原創或已授權素材替換暫代素材
+- [ ] 配置聯絡電郵或表單端點
+- [ ] 上線前完成法律及使用權審查

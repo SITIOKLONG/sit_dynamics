@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-type Tone = "dark" | "light" | "signal" | "steel";
+type Tone = "default" | "accent" | "muted";
 
 interface TagProps {
   children: React.ReactNode;
@@ -10,17 +10,21 @@ interface TagProps {
 }
 
 const tones: Record<Tone, string> = {
-  dark: "border-white/20 text-steel",
-  light: "border-void/20 text-void/70",
-  signal: "border-signal/50 text-signal",
-  steel: "border-steel/40 text-steel",
+  default: "border-line text-muted",
+  accent: "border-signal/60 text-signal-light",
+  muted: "border-line/70 text-muted/80",
 };
 
-export function Tag({ children, tone = "dark", dot = false, className }: TagProps) {
+export function Tag({
+  children,
+  tone = "default",
+  dot = false,
+  className,
+}: TagProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 rounded-[2px] border px-2 py-1 font-mono text-[10.5px] leading-none tracking-technical uppercase",
+        "inline-flex items-center gap-2 rounded-none border px-2 py-1 font-mono text-[9.5px] leading-none uppercase tracking-technical",
         tones[tone],
         className,
       )}
@@ -29,7 +33,7 @@ export function Tag({ children, tone = "dark", dot = false, className }: TagProp
         <span
           className={cn(
             "size-1.5",
-            tone === "signal" ? "bg-signal" : "bg-current opacity-70",
+            tone === "accent" ? "bg-signal" : "bg-current opacity-70",
           )}
           aria-hidden="true"
         />

@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 
 export const size = {
@@ -7,7 +9,15 @@ export const size = {
 
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const fontData = await readFile(
+    path.join(process.cwd(), "src/app/_fonts/og-cjk.ttf"),
+  );
+  const font = fontData.buffer.slice(
+    fontData.byteOffset,
+    fontData.byteOffset + fontData.byteLength,
+  ) as ArrayBuffer;
+
   return new ImageResponse(
     (
       <div
@@ -17,9 +27,10 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#111214",
-          padding: 72,
-          fontFamily: "sans-serif",
+          backgroundColor: "#F0EEE7",
+          border: "1px solid #A7AAA8",
+          padding: 64,
+          fontFamily: "OG CJK",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
@@ -27,46 +38,51 @@ export default function OpenGraphImage() {
             style={{
               width: 28,
               height: 28,
-              border: "2px solid #E9E6DE",
+              border: "2px solid #202124",
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "flex-end",
             }}
           >
-            <div style={{ width: 10, height: 10, backgroundColor: "#D9403A" }} />
+            <div style={{ width: 10, height: 10, backgroundColor: "#762F32" }} />
           </div>
           <div
             style={{
-              color: "#909397",
-              fontSize: 22,
+              color: "#40433F",
+              fontSize: 20,
               letterSpacing: 6,
             }}
           >
-            SIT DYNAMICS — RESEARCH & ENGINEERING
+            SIT DYNAMICS — 科學 · 創新 · 科技
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              color: "#E9E6DE",
-              fontSize: 96,
-              fontWeight: 600,
-              letterSpacing: -2,
-              lineHeight: 1.05,
+              color: "#202124",
+              fontSize: 82,
+              fontWeight: 400,
+              letterSpacing: -3,
+              lineHeight: 1.02,
+              display: "flex",
+              flexDirection: "column",
             }}
           >
-            Research. Build. Verify.
+            <div>打造能力更強</div>
+            <div style={{ display: "flex" }}>
+              的人型機械人<span style={{ color: "#762F32" }}>。</span>
+            </div>
           </div>
           <div
             style={{
-              marginTop: 28,
-              color: "#909397",
-              fontSize: 28,
+              color: "#40433F",
+              fontSize: 24,
               letterSpacing: 1,
+              marginTop: 24,
             }}
           >
-            Humanoid Robotics / Control Systems / Engineering Integration
+            讓機械人像人一樣運動。
           </div>
         </div>
 
@@ -74,18 +90,28 @@ export default function OpenGraphImage() {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            color: "#909397",
+            color: "#40433F",
             fontSize: 20,
             letterSpacing: 4,
-            borderTop: "1px solid rgba(233,230,222,0.15)",
-            paddingTop: 28,
+            borderTop: "1px solid #A7AAA8",
+            paddingTop: 26,
           }}
         >
-          <span>SIM2REAL — BIPED — RL</span>
-          <span>MACAU</span>
+          <span>人型機械人 · 動力學 · 控制 · 模擬到實機</span>
+          <span>SIT / 研發</span>
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: [
+        {
+          name: "OG CJK",
+          data: font,
+          style: "normal",
+          weight: 400,
+        },
+      ],
+    },
   );
 }

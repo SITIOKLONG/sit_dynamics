@@ -2,11 +2,11 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "outline-dark" | "outline-light" | "ghost-dark";
+export type ButtonVariant = "primary" | "outline" | "ghost";
 
-interface ButtonProps {
+export interface ButtonProps {
   href?: string;
-  variant?: Variant;
+  variant?: ButtonVariant;
   size?: "sm" | "md" | "lg";
   arrow?: boolean;
   className?: string;
@@ -17,15 +17,13 @@ interface ButtonProps {
 }
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-[2px] font-medium tracking-wide transition-colors duration-200 select-none disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex select-none items-center justify-center gap-2 rounded-none font-medium tracking-wide transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50";
 
-const variants: Record<Variant, string> = {
-  primary: "bg-signal text-white hover:bg-signal-deep",
-  "outline-dark":
-    "border border-white/25 text-bone hover:border-bone/70 hover:bg-white/5",
-  "outline-light":
-    "border border-void/25 text-void hover:border-void/70 hover:bg-void/5",
-  "ghost-dark": "text-steel hover:text-bone",
+const variants: Record<ButtonVariant, string> = {
+  primary: "bg-signal text-paper hover:bg-signal-deep",
+  outline:
+    "border border-line text-fg hover:border-muted hover:bg-fg/[0.04]",
+  ghost: "text-muted hover:text-fg",
 };
 
 const sizes = {

@@ -3,13 +3,15 @@ import { Image as ImageIcon, Play } from "lucide-react";
 import type { MediaRatio, MediaSlot } from "@/data/media";
 import { publicAssetExists } from "@/lib/assets";
 import { cn } from "@/lib/utils";
-import { ChartPlaceholder } from "./ChartPlaceholder";
+import { MediaVideo } from "./MediaVideo";
 
 const ratioClasses: Record<MediaRatio, string> = {
+  "4/5": "aspect-[4/5]",
+  "21/9": "aspect-[21/9]",
   "16/9": "aspect-video",
+  "16/10": "aspect-[16/10]",
   "4/3": "aspect-[4/3]",
   "3/2": "aspect-[3/2]",
-  "10/7": "aspect-[10/7]",
   "1/1": "aspect-square",
 };
 
@@ -27,7 +29,7 @@ function CornerTicks() {
           key={pos}
           aria-hidden="true"
           className={cn(
-            "pointer-events-none absolute size-3 border-bone/40",
+            "pointer-events-none absolute size-2.5 border-fg/30",
             pos,
           )}
         />
@@ -41,107 +43,119 @@ export function MediaFrame({
   className,
   overlay,
   sizes = "(min-width: 1024px) 45vw, 100vw",
+  priority = false,
 }: {
   slot: MediaSlot;
   className?: string;
   overlay?: React.ReactNode;
   sizes?: string;
+  priority?: boolean;
 }) {
-  const hasRealAsset =
-    slot.kind !== "chart" && publicAssetExists(slot.src);
+  const hasRealAsset = publicAssetExists(slot.src);
   const hasPoster = publicAssetExists(slot.poster);
-  const isChart = slot.kind === "chart";
-  const hasRealChart = isChart && publicAssetExists(slot.src);
 
   return (
     <figure
+      aria-label={slot.alt}
       className={cn(
-        "relative overflow-hidden rounded-[2px] border border-white/10 bg-graphite-soft",
+        "theme-dark relative overflow-hidden rounded-none border border-line bg-panel",
         ratioClasses[slot.ratio],
         className,
       )}
     >
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-20 h-px bg-sand/40"
+      />
       {hasRealAsset && slot.kind === "video" && (
-        <video
-          className="absolute inset-0 size-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={hasPoster && slot.poster ? slot.poster : undefined}
-        >
-          <source src={slot.src ?? undefined} type="video/mp4" />
-        </video>
+        <>
+          <MediaVideo
+            src={slot.src}
+            poster={hasPoster && slot.poster ? slot.poster : undefined}
+            alt={slot.alt}
+          />
+          <div
+            aria-hidden="true"
+            className="media-scanlines pointer-events-none absolute inset-0 z-10"
+          />
+        </>
       )}
-      {hasRealAsset && slot.kind === "image" && slot.src && (
+
+      {hasRealAsset && slot.kind === "image" && (
         <Image
           src={slot.src}
-          alt={slot.titleZh}
+          alt={slot.alt}
           fill
           sizes={sizes}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
           className="object-cover"
         />
       )}
-      {hasRealChart && slot.src && (
-        <Image
-          src={slot.src}
-          alt={slot.titleZh}
-          fill
-          sizes={sizes}
-          className="object-contain p-4"
-        />
-      )}
-      {!hasRealAsset && !hasRealChart && isChart && <ChartPlaceholder />}
-      {!hasRealAsset && !hasRealChart && !isChart && (
-        <div className="absolute inset-0">
+
+      {!hasRealAsset && (
+        <>
           <div className="absolute inset-0 eng-grid opacity-70" aria-hidden="true" />
+          <div className="absolute inset-0 media-glow" aria-hidden="true" />
           <div
+            className="absolute inset-0 bg-gradient-to-t from-surface/90 via-surface/10 to-surface/30"
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-br from-void/60 via-transparent to-void/80"
           />
           <div
+            className="absolute inset-y-0 left-1/3 w-px bg-fg/[0.045]"
             aria-hidden="true"
-            className="absolute inset-0"
-            style={{ boxShadow: "inset 0 0 110px rgba(11, 12, 13, 0.6)" }}
           />
           <div
+            className="absolute inset-y-0 left-2/3 w-px bg-fg/[0.045]"
             aria-hidden="true"
-            className="absolute inset-y-0 left-1/3 w-px bg-bone/5"
           />
           <div
+            className="absolute inset-x-0 top-1/2 h-px bg-fg/[0.045]"
             aria-hidden="true"
-            className="absolute inset-y-0 left-2/3 w-px bg-bone/5"
           />
-          <div
-            aria-hidden="true"
-            className="absolute inset-x-0 top-1/2 h-px bg-bone/5"
-          />
+
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="flex size-14 items-center justify-center rounded-full border border-bone/20 text-bone/40">
+            <span className="flex size-12 items-center justify-center rounded-full border border-line text-muted/80">
               {slot.kind === "video" ? (
-                <Play className="size-5 -translate-x-px" aria-hidden="true" />
+                <Play
+                  className="size-[18px] translate-x-px"
+                  aria-hidden="true"
+                />
               ) : (
-                <ImageIcon className="size-5" aria-hidden="true" />
+                <ImageIcon className="size-[18px]" aria-hidden="true" />
               )}
             </span>
           </div>
+        </>
+      )}
+
+      {hasRealAsset && slot.caption && (
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex justify-start p-4">
+          <span className="bg-surface/70 px-2 py-1 font-mono text-[9px] uppercase tracking-technical text-fg/80 backdrop-blur-sm">
+            {slot.caption}
+          </span>
         </div>
       )}
-      <CornerTicks />
-      <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-4">
-        <span className="font-mono text-[10.5px] tracking-technical text-steel/90 uppercase">
-          {slot.caption}
-        </span>
-        <span className="rounded-[2px] border border-white/15 px-1.5 py-0.5 font-mono text-[9.5px] tracking-technical text-steel/70 uppercase">
-          素材待補
-        </span>
-      </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-4">
-        <span className="font-mono text-[10.5px] tracking-technical text-steel/70 uppercase">
-          {slot.titleZh}
-        </span>
-      </div>
+
+      {!hasRealAsset && (
+        <>
+          <CornerTicks />
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-4 p-4">
+            <span className="font-mono text-[9px] uppercase tracking-technical text-muted/80">
+              {slot.caption}
+            </span>
+            <span className="border border-line bg-surface/30 px-1.5 py-0.5 font-mono text-[8.5px] uppercase tracking-technical text-muted/80">
+              素材待替換
+            </span>
+          </div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4">
+            <p className="max-w-[92%] font-mono text-[9.5px] leading-relaxed uppercase tracking-[0.13em] text-muted">
+              {slot.label}
+            </p>
+          </div>
+        </>
+      )}
+
       {overlay}
     </figure>
   );

@@ -26,3 +26,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Raw media masters (keep only optimized files in public/media)
+media/source/*
+!media/source/README.md

@@ -2,58 +2,63 @@ export const siteConfig = {
   brand: {
     name: "SIT Dynamics",
     wordmark: "SIT DYNAMICS",
-    descriptor: "Research & Engineering",
-    focus: "Humanoid Robotics / Control Systems / Engineering Integration",
-    tagline: "Research. Build. Verify.",
-    taglineZh: "研究，構建，驗證。",
-    supportingLine: "從模擬到實機，從想法到能夠運作的系統。",
-    heroIntro:
-      "我們以雙足人型機械人、運動控制、強化學習與實機測試為基礎，建立工程教育與客製化研發方案。",
-    workingNameNote:
-      "SIT Dynamics 為現行品牌名稱；所有品牌字串集中於 site-config.ts，方便日後統一修改。",
+    meaning: "科學 · 創新 · 科技",
+    tagline: "讓機械人像人一樣運動。",
+    supporting:
+      "從機械設計、機械動力學與智能控制，到強化學習及實機部署，SIT Dynamics 致力於將科學原理轉化為真實世界中可運作的機械人系統。",
+    positioning:
+      "專注人型機械人、機械人運動控制與實際系統研發的深科技公司。",
   },
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || null,
-    pendingLabel: "聯絡電郵待配置",
-    adminHint:
-      "網站管理員：請於環境變數設定 NEXT_PUBLIC_CONTACT_EMAIL，設定後表單可直接以電郵傳送。",
-    audience:
-      "澳門中小學、具備工程或 STEM 教學需要的學校、教育機構，以及需要雙足機械人客製化整合的實驗室或企業。",
-    responseNote:
-      "我們透過電郵或你提供的聯絡方式回覆；回覆時間視查詢內容而定。",
-    noPublicChannelNote:
-      "網站現階段不設公開電話或地址；請使用表單或電郵聯絡。",
-  },
   nav: [
-    { label: "服務方案", href: "/services" },
-    { label: "客製化工程", href: "/customization" },
-    { label: "機械人平台", href: "/platforms" },
-    { label: "工程案例", href: "/projects" },
-    { label: "聯絡", href: "/contact" },
+    { label: "研究方向", href: "#research" },
+    { label: "技術能力", href: "#capabilities" },
+    { label: "旗艦願景", href: "#vision" },
+    { label: "產品方案", href: "#solutions" },
+    { label: "聯絡我們", href: "#contact" },
   ],
   cta: {
-    label: "討論工程項目",
-    href: "/contact",
+    label: "討論研發項目",
+    href: "#contact",
+  },
+  soundtrack: {
+    src: "/media/westworld-main-title.mp3",
+    title: "Main Title Theme — Westworld",
+    artist: "Ramin Djawadi",
+    album: "Westworld: Season 1 (Music from the HBO Series)",
+  },
+  contact: {
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || null,
+    endpoint: process.env.NEXT_PUBLIC_ENQUIRY_ENDPOINT?.trim() || null,
+    pendingLabel: "聯絡電郵尚未配置",
+    adminHint:
+      "網站設定：配置 NEXT_PUBLIC_ENQUIRY_ENDPOINT 以連接表單傳送，或配置 NEXT_PUBLIC_CONTACT_EMAIL 以啟用電郵備用方式。",
+    noPublicDetails:
+      "在正式配置前，本網站不列出電話、辦公室地址或社交帳戶。",
   },
   seo: {
+    title: "SIT Dynamics — 人型機械人研發與運動控制",
+    description:
+      "SIT Dynamics 專注人型機械人、機械人動力學、運動控制、強化學習與模擬到實機部署，為學校、研究機構及企業提供研發方案。",
+    locale: "zh_HK",
     keywords: [
-      "澳門人型機械人課程",
-      "澳門雙足機械人",
-      "澳門機械人 STEM",
-      "人型機械人研發教育",
-      "雙足機械人控制",
-      "強化學習機械人",
-      "Sim2Real",
-      "機械人客製化工程",
-      "人型機械人工作坊",
-      "研發教學平台",
+      "人型機械人",
+      "雙足機械人",
+      "機械人動力學",
+      "運動控制",
+      "強化學習",
+      "模擬到實機",
+      "機械人研發",
+      "機械人開發平台",
     ],
-    locale: "zh_MO",
   },
   disclaimers: {
-    thirdParty:
-      "第三方機械人價格、型號配置、開發權限與租借條款由供應商決定，並可能隨時間調整。表中價格僅供初步比較，不構成採購或租借報價。",
+    pricing:
+      "所有價格均為現階段方案定位；正式報價仍須按實際交付範圍確認。",
+    visuals:
+      "部分視覺素材仍為可替換的暫代素材；實際素材將於取得原創或授權後更新。",
+    flagship:
+      "概念願景。最終技術平台與交付範圍須按項目另行定義。",
   },
 } as const;
 

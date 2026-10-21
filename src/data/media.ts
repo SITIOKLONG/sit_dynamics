@@ -1,129 +1,166 @@
-export type MediaKind = "video" | "image" | "chart";
+export type MediaKind = "video" | "image";
 
-export type MediaRatio = "16/9" | "4/3" | "3/2" | "10/7" | "1/1";
+export type MediaRatio =
+  | "4/5"
+  | "21/9"
+  | "16/9"
+  | "16/10"
+  | "4/3"
+  | "3/2"
+  | "1/1";
 
 export interface MediaSlot {
   id: string;
   kind: MediaKind;
-  src: string | null;
-  poster: string | null;
   ratio: MediaRatio;
+  src: string;
+  poster: string | null;
+  label: string;
   caption: string;
-  titleZh: string;
   filename: string;
   recommended: string;
-  note: string;
+  alt: string;
 }
 
 export const mediaSlots = {
-  heroVideo: {
-    id: "hero-video",
+  hero: {
+    id: "hero",
     kind: "video",
-    src: "/media/hero-biped.mp4",
-    poster: "/media/hero-biped-poster.jpg",
-    ratio: "4/3",
-    caption: "EXP-014 / BIPED-LOCO",
-    titleZh: "雙足實機行走（主視覺影片）",
-    filename: "hero-biped.mp4",
+    ratio: "4/5",
+    src: "/media/hero-humanoid-top.mp4",
+    poster: "/media/hero-humanoid-top-poster.jpg",
+    label: "[首頁主視覺：機身頂部紅色指示燈特寫]",
+    caption: "SIT / 頂部結構",
+    filename: "hero-humanoid-top.mp4",
     recommended:
-      "1600 × 1200（4:3）· H.264 MP4 · 15–30 秒無縫循環 · 15 MB 以內；建議同時提供 hero-biped-poster.jpg（同尺寸）",
-    note: "低光實驗室或走廊環境、紅色 LED 及小量紅光、去飽和工業灰調 — 與品牌視覺一致。",
+      "640 × 800（4:5），H.264 MP4，4.8 秒來回循環，約 216 KB，無音軌；另備同尺寸 JPG 封面圖",
+    alt: "雙足人型機械人頂部結構與紅色指示燈特寫",
   },
-  bipedWalk: {
-    id: "biped-walk",
-    kind: "image",
-    src: "/media/biped-walk.jpg",
-    poster: null,
+  research: {
+    id: "research-biped",
+    kind: "video",
     ratio: "4/3",
-    caption: "EXP-021 / WALK-TEST-03",
-    titleZh: "雙足實機行走",
-    filename: "biped-walk.jpg",
-    recommended: "1600 × 1200（4:3）· JPG/WebP · 500 KB 以內",
-    note: "自研雙足平台行走測試之實拍，用於工程案例頁。",
+    src: "/media/biped-walking.mp4",
+    poster: "/media/biped-walking-poster.jpg",
+    label: "[雙足機械人懸吊架腿部運動測試]",
+    caption: "SIT / 運動研究",
+    filename: "biped-walking.mp4",
+    recommended:
+      "960 × 720（4:3），H.264 MP4，12.5 秒，約 3.3 MB，無音軌；另備同尺寸 JPG 封面圖",
+    alt: "雙足機械人在測試架上進行腿部運動測試",
   },
-  controlSim: {
-    id: "control-sim",
-    kind: "image",
-    src: "/media/control-sim.jpg",
-    poster: null,
-    ratio: "3/2",
-    caption: "SIM-002 / ISAAC LAB",
-    titleZh: "控制程式與模擬環境",
-    filename: "control-sim.jpg",
-    recommended: "1800 × 1200（3:2）· JPG/WebP · 500 KB 以內",
-    note: "模擬環境或控制程式介面截圖；如含敏感內容請先整理。",
-  },
-  hardwareDetail: {
-    id: "hardware-detail",
-    kind: "image",
-    src: "/media/hardware-detail.jpg",
-    poster: null,
+  mechanicalDesign: {
+    id: "mechanical-design",
+    kind: "video",
     ratio: "4/3",
-    caption: "HW-007 / ACTUATOR BAY",
-    titleZh: "馬達、線材、電子及機械結構",
-    filename: "hardware-detail.jpg",
-    recommended: "1600 × 1200（4:3）· JPG/WebP · 500 KB 以內",
-    note: "關節驅動、線材整理或電子模組之微距特寫。",
+    src: "/media/dex-hand.mp4",
+    poster: "/media/dex-hand-poster.jpg",
+    label: "[靈巧手機構與關節運動]",
+    caption: "SIT / 機械設計",
+    filename: "dex-hand.mp4",
+    recommended:
+      "1200 × 900（4:3），H.264 MP4，18.8 秒，約 2.2 MB，無音軌；另備同尺寸 JPG 封面圖",
+    alt: "多指靈巧手在實驗室展示關節與機構運動",
   },
-  studentLab: {
-    id: "student-lab",
+  robotControl: {
+    id: "robot-control",
+    kind: "video",
+    ratio: "4/3",
+    src: "/media/moveit-control.mp4",
+    poster: "/media/moveit-control-poster.jpg",
+    label: "[MoveIt 2 運動規劃與控制介面]",
+    caption: "MoveIt 2 / 工具示範",
+    filename: "moveit-control.mp4",
+    recommended:
+      "1200 × 900（4:3），H.264 MP4，28.4 秒，約 3.4 MB，無音軌；另備同尺寸 JPG 封面圖",
+    alt: "MoveIt 2 運動規劃軟件示範，屏幕顯示機械臂模型與軌跡",
+  },
+  reinforcementLearning: {
+    id: "reinforcement-learning",
+    kind: "video",
+    ratio: "16/10",
+    src: "/media/reinforcement-learning.mp4",
+    poster: "/media/reinforcement-learning-poster.jpg",
+    label: "[Isaac Sim 強化學習模擬環境]",
+    caption: "SIT / 強化學習",
+    filename: "reinforcement-learning.mp4",
+    recommended:
+      "1024 × 640（16:10），H.264 MP4，15 秒循環，約 4 MB，無音軌；另備同尺寸 JPG 封面圖",
+    alt: "Isaac Sim 模擬環境中的多個機械人訓練畫面",
+  },
+  simToReal: {
+    id: "sim-to-real",
+    kind: "video",
+    ratio: "4/3",
+    src: "/media/integration-walking.mp4",
+    poster: "/media/integration-walking-poster.jpg",
+    label: "[實機行走與系統整合]",
+    caption: "SIT / 模擬到實機",
+    filename: "integration-walking.mp4",
+    recommended:
+      "960 × 720（4:3），H.264 MP4，46.7 秒，約 3.8 MB，無音軌；另備同尺寸 JPG 封面圖",
+    alt: "雙足人型機械人在走廊行走，展示模擬到實機與系統整合",
+  },
+  workshop: {
+    id: "workshop",
     kind: "image",
-    src: "/media/student-lab.jpg",
-    poster: null,
     ratio: "3/2",
-    caption: "EDU-001 / STUDENT LAB",
-    titleZh: "學生工程實驗",
-    filename: "student-lab.jpg",
-    recommended: "1800 × 1200（3:2）· JPG/WebP · 500 KB 以內",
-    note: "學生進行實驗或量測之實拍；須取得肖像同意後方可使用。",
+    src: "/media/planA.jpeg",
+    poster: null,
+    label: "[工作坊與示範]",
+    caption: "SIT / 工作坊",
+    filename: "planA.jpeg",
+    recommended: "1691 × 1122（約 3:2），JPG，743 KB",
+    alt: "學生在課室使用電腦參與機械人工作坊",
   },
-  innoxVisit: {
-    id: "innox-visit",
+  pilot: {
+    id: "pilot",
     kind: "image",
-    src: "/media/innox-visit.jpg",
-    poster: null,
     ratio: "3/2",
-    caption: "VISIT-001 / SZ TOUR",
-    titleZh: "InnoX／深圳參訪",
-    filename: "innox-visit.jpg",
-    recommended: "1800 × 1200（3:2）· JPG/WebP · 500 KB 以內",
-    note: "參訪活動實拍；須取得場地及機構正式授權後方可公開。",
+    src: "/media/planA.jpeg",
+    poster: null,
+    label: "[工程試點計劃]",
+    caption: "SIT / 工程試點",
+    filename: "planA.jpeg",
+    recommended: "1691 × 1122（約 3:2），JPG，743 KB",
+    alt: "學生在課室參與機械人工程試點活動",
   },
-  beijingMarathon: {
-    id: "beijing-marathon",
+  kit: {
+    id: "development-kit",
     kind: "image",
-    src: "/media/beijing-marathon.jpg",
-    poster: null,
     ratio: "3/2",
-    caption: "RACE-001 / BEIJING HM",
-    titleZh: "北京人型機械人半程馬拉松",
-    filename: "beijing-marathon.jpg",
-    recommended: "1800 × 1200（3:2）· JPG/WebP · 500 KB 以內",
-    note: "賽事或備賽實拍；使用時須遵守賽會規定及肖像權要求。",
-  },
-  experimentChart: {
-    id: "experiment-chart",
-    kind: "chart",
-    src: "/media/experiment-chart.png",
+    src: "/media/planC.webp",
     poster: null,
+    label: "[雙足開發套件]",
+    caption: "ENCOS / 硬件參考",
+    filename: "planC.webp",
+    recommended: "1080 × 809（4:3 原圖，介面以 3:2 裁切），WebP，93 KB",
+    alt: "兩組雙足機械人腿部實驗平台，機身標有 ENCOS 標誌",
+  },
+  education: {
+    id: "education-programme",
+    kind: "image",
+    ratio: "3/2",
+    src: "/media/planC.webp",
+    poster: null,
+    label: "[機械人研發教育計劃]",
+    caption: "ENCOS / 硬件參考",
+    filename: "planC.webp",
+    recommended: "1080 × 809（4:3 原圖，介面以 3:2 裁切），WebP，93 KB",
+    alt: "兩組雙足機械人腿部實驗平台，作為研發教育硬件參考",
+  },
+  flagship: {
+    id: "flagship-humanoid",
+    kind: "video",
     ratio: "16/9",
-    caption: "DATA-003 / SIM VS REAL",
-    titleZh: "實驗數據圖表",
-    filename: "experiment-chart.png",
-    recommended: "1600 × 900（16:9）· PNG · 300 KB 以內",
-    note: "可替換為訓練曲線、Sim2Real 對比或測試結果圖；請使用真實數據。",
-  },
-  annualProgram: {
-    id: "annual-program",
-    kind: "image",
-    src: "/media/annual-program.jpg",
-    poster: null,
-    ratio: "3/2",
-    caption: "PROG-001 / ANNUAL REVIEW",
-    titleZh: "年度項目里程碑與展示",
-    filename: "annual-program.jpg",
-    recommended: "1800 × 1200（3:2）· JPG/WebP · 500 KB 以內",
-    note: "年度項目之里程碑測試或成果展示實拍。",
+    src: "/media/encos-humanoid.mp4",
+    poster: "/media/encos-humanoid-poster.jpg",
+    label: "[ENCOS 全尺寸人型機械人參考片段]",
+    caption: "ENCOS / 參考片段",
+    filename: "encos-humanoid.mp4",
+    recommended:
+      "1280 × 720（16:9），H.264 MP4，16.5 秒，約 4.9 MB，無音軌；另備同尺寸 JPG 封面圖",
+    alt: "ENCOS 全尺寸人型機械人在實驗室及戶外行走的參考片段",
   },
 } as const satisfies Record<string, MediaSlot>;
 
