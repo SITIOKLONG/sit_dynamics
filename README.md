@@ -50,7 +50,7 @@ npm run build:static
 - Username：`ilsit`
 - 公開網址：`https://ilsit.student.ust.hk`
 
-`public/.htaccess` 會複製到 `out/.htaccess`，負責舊路徑 redirect、404 頁、Open Graph 圖片 MIME 及靜態資源快取。HKUST 只提供靜態檔案及 PHP，不支援 Node.js server，因此不要上傳 `.next/` 或使用 `npm run start`。目前網站沒有使用 MySQL；表單在未配置 `NEXT_PUBLIC_ENQUIRY_ENDPOINT` 前會保持「準備並複製」模式。
+`public/.htaccess` 會複製到 `out/.htaccess`，負責舊路徑 redirect、404 頁、Open Graph 圖片 MIME 及靜態資源快取。HKUST 只提供靜態檔案及 PHP，不支援 Node.js server，因此不要上傳 `.next/` 或使用 `npm run start`。使用圖形化 FTP 工具時，請開啟「顯示隱藏檔案」，確保 `.htaccess` 一併上傳。目前網站沒有使用 MySQL；表單在未配置 `NEXT_PUBLIC_ENQUIRY_ENDPOINT` 前會保持「準備並複製」模式。
 
 ## 頁面結構
 

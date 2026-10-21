@@ -16,8 +16,12 @@ ErrorDocument 404 /404.html
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
 
-  <FilesMatch "\.(js|css|mp4|webp|jpg|jpeg|png|svg|mp3|woff2)$">
+  <FilesMatch "\.(js|css|woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.(mp4|webp|jpg|jpeg|png|svg|mp3)$">
+    Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
 
   <FilesMatch "\.html$">
@@ -27,4 +31,5 @@ ErrorDocument 404 /404.html
 
 <Files "opengraph-image">
   ForceType image/png
+  Header set Cache-Control "public, max-age=86400"
 </Files>
