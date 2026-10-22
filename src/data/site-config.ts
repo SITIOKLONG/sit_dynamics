@@ -15,6 +15,7 @@ export const siteConfig = {
     { label: "技術能力", href: "#capabilities" },
     { label: "旗艦願景", href: "#vision" },
     { label: "產品方案", href: "#solutions" },
+    { label: "安全提醒", href: "#safety" },
     { label: "聯絡我們", href: "#contact" },
   ],
   cta: {

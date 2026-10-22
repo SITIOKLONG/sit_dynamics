@@ -61,7 +61,8 @@ npm run build:static
 3. 技術能力（`#capabilities`）
 4. 旗艦研發願景（`#vision`）
 5. 產品方案（`#solutions`）
-6. 聯絡我們（`#contact`）
+6. 安全與責任（`#safety`）
+7. 聯絡我們（`#contact`）
 
 原有路由會 redirect 至對應區塊：Node server 由 `next.config.ts` 處理，靜態部署則由 `public/.htaccess` 處理 `/services`、`/customization`、`/platforms`、`/projects`、`/contact`。
 

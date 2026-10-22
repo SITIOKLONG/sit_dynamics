@@ -17,7 +17,7 @@ export function ContactSection() {
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <Reveal>
-              <SectionLabel>07 / 聯絡我們</SectionLabel>
+              <SectionLabel>06 / 聯絡我們</SectionLabel>
             </Reveal>
 
             <Reveal delay={0.06}>
