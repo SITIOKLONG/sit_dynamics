@@ -6,18 +6,7 @@ const safetyPoints = [
   "客戶操作時，請讓人與機械人保持至少 2–3 米的安全距離。",
   "部分極限測試具高度風險，請勿模仿。",
   "不同型號與版本的功能可能有所差異。",
-  <>
-    有關宇樹科技（Unitree）產品的條款與政策，請參閱其
-    <a
-      href="https://www.unitree.com/"
-      target="_blank"
-      rel="noreferrer"
-      className="mx-1 underline decoration-line underline-offset-4 transition-colors hover:text-signal-light"
-    >
-      官方網站
-    </a>
-    ，並請遵守所在地法律法規。
-  </>,
+  "請參閱相關產品說明及官方網站，了解產品條款與政策，並遵守所在地法律法規。",
   "人形機械人目前仍處於全球早期探索階段；個人用戶採購前，請務必先詳細了解其局限性。",
 ];
 
